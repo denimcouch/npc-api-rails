@@ -29,7 +29,7 @@ class Api::UsersController < ApplicationController
   end
 
   def auto_login
-    render json: @user
+    render json: {user: UserSerializer.new(@user)}
   end
 
   private
