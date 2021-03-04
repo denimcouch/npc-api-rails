@@ -9,10 +9,17 @@ class Api::CharactersController < ApplicationController
     render json: {user: UserSerializer.new(user)}
   end
 
+  def destroy 
+    character = Character.find(character_params[:id])
+    user = character.user
+    character.destroy
+    render json: {user: UserSerializer.new(user)}
+  end
+
   private
 
   def character_params
-    params.require(:character).permit(:name, :race, :is_adventurer, :role, :user_id)
+    params.require(:character).permit(:id, :name, :race, :is_adventurer, :role, :user_id)
   end
 
 end
