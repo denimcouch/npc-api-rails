@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+  require_relative '../../.jwt_key.rb'
   before_action :authorized
 
   def encode_token(payload)
@@ -14,7 +15,7 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        JWT.decode(token, $jwt_key, true, algorithn: 'HS256')
+        JWT.decode(token, $jwt_key, true, algorithm: 'HS256')
       rescue JWT::DecodeError
         nil
       end
@@ -33,6 +34,7 @@ class ApplicationController < ActionController::API
   end
 
   def authorized
+    byebug
     render json: { message: 'Please log in' }, status: :unauthorized unless is_logged_in
   end
 

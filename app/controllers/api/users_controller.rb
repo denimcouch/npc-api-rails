@@ -22,6 +22,7 @@ class Api::UsersController < ApplicationController
     @user = User.find_by(username: user_params[:username])
     if @user.class == User && @user.authenticate(user_params[:password])
       token = encode_token({user_id: @user.id})
+      byebug
       render json: {user: UserSerializer.new(@user), token: token}
     else
       render json: {error: "Invalid username or password"}

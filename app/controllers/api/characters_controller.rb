@@ -2,6 +2,7 @@ class Api::CharactersController < ApplicationController
   before_action :authorized
 
   def create
+    byebug
     user = User.find_by(id: character_params[:user_id])
     character = Character.new(name: character_params[:name], race: character_params[:race], is_adventurer: character_params[:is_adventurer], role: character_params[:role], user_id: character_params[:user_id])
     character.save
