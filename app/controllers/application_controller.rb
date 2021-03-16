@@ -34,7 +34,6 @@ class ApplicationController < ActionController::API
   end
 
   def authorized
-    byebug
     render json: { message: 'Please log in' }, status: :unauthorized unless is_logged_in
   end
 
